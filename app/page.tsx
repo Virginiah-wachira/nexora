@@ -509,7 +509,6 @@ export default function Home() {
 
 
 
-{/* CONTACT */}
 <section
   id="contact"
   className="border-t border-gray-900 px-6 py-24"
@@ -518,7 +517,7 @@ export default function Home() {
 
     <div className="rounded-3xl border border-gray-800 bg-gray-950 px-5 py-12 sm:px-10 sm:py-16 md:px-16">
 
-      <div className="grid gap-12 md:grid-cols-2 md:items-center">
+      <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
         {/* LEFT */}
         <div className="animate-[fadeInUp_0.9s_ease-out]">
@@ -540,73 +539,151 @@ export default function Home() {
             real.
           </p>
 
-        </div>
+          {/* CONTACT DETAILS */}
+          <div className="mt-10 flex flex-col gap-4">
 
+            <a
+              href="mailto:hello@nexora.dev"
+              className="group flex items-center justify-between rounded-2xl border border-gray-800 px-6 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-gray-600 hover:bg-black"
+            >
+              <div>
+                <p className="text-xs uppercase tracking-widest text-gray-600">
+                  Email
+                </p>
 
-        {/* RIGHT */}
-        <div className="flex flex-col gap-4">
+                <p className="mt-1 text-sm text-gray-300">
+                  hello@nexora.dev
+                </p>
+              </div>
 
-          <a
-            href="mailto:hello@nexora.dev"
-            className="group flex items-center justify-between rounded-2xl border border-gray-800 px-6 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-gray-600 hover:bg-black"
-          >
-            <div>
-              <p className="text-xs uppercase tracking-widest text-gray-600">
-                Email
-              </p>
+              <span className="text-xl text-gray-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white">
+                ↗
+              </span>
+            </a>
 
-              <p className="mt-1 text-sm text-gray-300">
-                hello@nexora.dev
-              </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+
+              <a
+                href="#"
+                className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
+              >
+                Instagram
+              </a>
+
+              <a
+                href="#"
+                className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
+              >
+                LinkedIn
+              </a>
+
+              <a
+                href="#"
+                className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
+              >
+                GitHub
+              </a>
+
             </div>
 
-            <span className="text-xl text-gray-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white">
-              ↗
-            </span>
-          </a>
-<div className="flex flex-wrap gap-3 pt-2">
-  <a
-    href="#"
-    className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
-  >
-    Instagram
-  </a>
-
-  <a
-    href="#"
-    className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
-  >
-    LinkedIn
-  </a>
-
-  <a
-    href="#"
-    className="rounded-full border border-gray-800 px-4 py-2 text-xs text-gray-500 transition-all duration-300 hover:border-gray-600 hover:text-white"
-  >
-    GitHub
-  </a>
-</div>
-
-          <a
-  href="mailto:hello@nexora.dev?subject=Project%20Inquiry"
-  className="group flex items-center justify-between rounded-2xl bg-white px-6 py-5 text-black transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200"
->
-  <div>
-    <p className="text-xs uppercase tracking-widest text-gray-500">
-      Start a project
-    </p>
-
-    <p className="mt-1 text-sm font-medium">
-      Lets talk about your idea
-    </p>
-  </div>
-
-  <span className="text-xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-    ↗
-  </span>
-</a>
+          </div>
 
         </div>
+
+        {/* RIGHT — CONTACT FORM */}
+        <form
+  action="https://formspree.io/f/mbglyprn"
+  method="POST"
+  className="flex flex-col gap-5"
+>
+
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
+              Name
+            </label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
+              Email
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
+              Project type
+            </label>
+
+            <select
+              name="project"
+              className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-gray-400 outline-none transition-all duration-300 focus:border-gray-500"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                What are you looking for?
+              </option>
+
+              <option value="website">
+                Website
+              </option>
+
+              <option value="mobile-app">
+                Mobile App
+              </option>
+
+              <option value="custom-software">
+                Custom Software
+              </option>
+
+              <option value="ai-automation">
+                AI & Automation
+              </option>
+
+              <option value="other">
+                Something else
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
+              Message
+            </label>
+
+            <textarea
+              name="message"
+              rows={5}
+              placeholder="Tell us a little about your project..."
+              className="w-full resize-none rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="group mt-2 flex items-center justify-between rounded-xl bg-white px-6 py-4 text-sm font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200"
+          >
+            <span>Send Message</span>
+
+            <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </button>
+
+        </form>
 
       </div>
 
