@@ -1,7 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "./components/Reveal";
+import nexoraIcon from "./icon.png";
+import nexoraWordmark from "./wordmark.png";
+
 const services = [
   {
     number: "01",
@@ -53,21 +57,30 @@ export default function Home() {
       <nav className="mx-auto max-w-7xl px-6 py-6">
         <div className="flex items-center justify-between">
           {/* LOGO */}
-          <a href="#home" className="group flex items-center gap-3">
-            {/* NEXORA MARK */}
-            <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-gray-700 bg-white text-black transition-all duration-500 group-hover:-rotate-3 group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.15)]">
-              <span className="text-lg font-black tracking-tighter">N</span>
+          <a href="#home" className="group flex items-center gap-2 sm:gap-3">
+            <Image
+              src={nexoraIcon}
+              alt="Nexora icon"
+              width={46}
+              height={46}
+              className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
+              priority
+            />
 
-              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:w-full" />
-            </span>
+            <div className="flex flex-col justify-center">
+              <Image
+                src={nexoraWordmark}
+                alt="Nexora"
+                width={200}
+                height={45}
+                className="h-auto w-[115px] object-contain sm:w-[165px]"
+                priority
+              />
 
-            {/* WORDMARK */}
-            <span className="text-2xl font-semibold tracking-[-0.03em]">
-              Nexora
-              <span className="text-gray-500 transition-colors duration-300 group-hover:text-white">
-                .
-              </span>
-            </span>
+              <p className="mt-1 hidden text-[8px] uppercase tracking-[0.27em] text-gray-500 sm:block">
+                Build / Develop / Innovate
+              </p>
+            </div>
           </a>
 
           {/* DESKTOP NAV */}
@@ -182,7 +195,6 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      {/* HERO */}
       <section
         id="home"
         className="relative overflow-hidden px-6 pb-32 pt-24 sm:pb-40 sm:pt-32"
@@ -210,6 +222,14 @@ export default function Home() {
             {/* LABEL */}
             <div className="mb-8 flex items-center gap-3">
               <span className="h-px w-10 bg-gray-700" />
+
+              <Image
+                src={nexoraIcon}
+                alt="Nexora"
+                width={28}
+                height={28}
+                className="rounded-md"
+              />
 
               <p className="text-sm uppercase tracking-[0.3em] text-gray-500">
                 Nexora Digital Solutions
@@ -943,22 +963,27 @@ export default function Home() {
       </Reveal>
 
       {/* FOOTER */}
-      <footer className="border-t border-gray-900 px-6 py-16">
+      <footer className="border-t border-gray-900 px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
             {/* BRAND */}
             <div className="lg:col-span-2">
               <a href="#home" className="group inline-flex items-center gap-3">
-                <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-gray-700 bg-white text-black transition-all duration-500 group-hover:-rotate-3 group-hover:border-white">
-                  <span className="text-lg font-black tracking-tighter">N</span>
+                <Image
+                  src={nexoraIcon}
+                  alt="Nexora icon"
+                  width={46}
+                  height={46}
+                  className="h-11 w-11 object-contain"
+                />
 
-                  <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:w-full" />
-                </span>
-
-                <span className="text-2xl font-semibold tracking-[-0.03em]">
-                  Nexora
-                  <span className="text-gray-500">.</span>
-                </span>
+                <Image
+                  src={nexoraWordmark}
+                  alt="Nexora"
+                  width={170}
+                  height={40}
+                  className="h-auto w-[145px] object-contain sm:w-[170px]"
+                />
               </a>
 
               <p className="mt-6 max-w-md text-sm leading-7 text-gray-500">
@@ -1051,61 +1076,6 @@ export default function Home() {
             <p className="uppercase tracking-[0.2em]">
               Digital solutions, engineered.
             </p>
-          </div>
-        </div>
-      </footer>
-
-      {/* FOOTER */}
-      <footer className="border-t border-gray-900 px-6 py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            {/* BRAND */}
-            <div>
-              <h2 className="text-2xl font-bold">
-                Nexora<span className="text-gray-500">.</span>
-              </h2>
-
-              <p className="mt-3 max-w-sm text-sm leading-6 text-gray-600">
-                Performance-focused digital solutions for businesses and
-                startups.
-              </p>
-            </div>
-
-            {/* LINKS */}
-            <div className="flex flex-wrap gap-6 text-sm text-gray-500">
-              <a href="#home" className="transition-colors hover:text-white">
-                Home
-              </a>
-
-              <a
-                href="#services"
-                className="transition-colors hover:text-white"
-              >
-                Services
-              </a>
-
-              <a
-                href="#projects"
-                className="transition-colors hover:text-white"
-              >
-                Projects
-              </a>
-
-              <a href="#about" className="transition-colors hover:text-white">
-                About
-              </a>
-
-              <a href="#contact" className="transition-colors hover:text-white">
-                Contact
-              </a>
-            </div>
-          </div>
-
-          {/* BOTTOM */}
-          <div className="mt-12 flex flex-col gap-3 border-t border-gray-900 pt-6 text-xs text-gray-600 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} Nexora. All rights reserved.</p>
-
-            <p>Built with purpose.</p>
           </div>
         </div>
       </footer>

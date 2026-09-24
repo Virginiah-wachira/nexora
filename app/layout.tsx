@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nexora — Digital Solutions",
+    default: "Nexora — Web, App & Software Development",
     template: "%s — Nexora",
   },
 
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
 
   keywords: [
     "Nexora",
-    "software development",
-    "web development",
-    "mobile app development",
+    "web development Kenya",
+    "mobile app development Kenya",
+    "software development Kenya",
     "custom software development",
     "AI automation",
-    "digital solutions",
-    "Kenya software development",
+    "business websites",
+    "startup software development",
   ],
 
   authors: [
@@ -41,11 +41,20 @@ export const metadata: Metadata = {
   creator: "Nexora",
 
   openGraph: {
-    title: "Nexora — Digital Solutions",
+    title: "Nexora — Web, App & Software Development",
     description:
-      "Modern websites, mobile apps, custom software, AI and automation solutions.",
+      "Modern websites, mobile apps, custom software, AI and automation solutions for businesses and startups.",
     type: "website",
     siteName: "Nexora",
+    url: "https://nexora-mu-smoky.vercel.app",
+    images: [
+  {
+    url: "/opengraph-image.png",
+    width: 1200,
+    height: 630,
+    alt: "Nexora Digital Solutions",
+  },
+],
   },
 
   robots: {
