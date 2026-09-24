@@ -3,6 +3,17 @@
 :root {
   --background: #050505;
   --foreground: #ffffff;
+  --muted: #6b7280;
+  --border: #1f1f1f;
+  --card: #0a0a0a;
+}
+
+html.light {
+  --background: #ffffff;
+  --foreground: #050505;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --card: #f8f8f8;
 }
 
 * {
@@ -18,6 +29,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 a {
@@ -28,6 +42,8 @@ a {
   background: white;
   color: black;
 }
+
+/* Fade animation */
 
 @keyframes fadeInUp {
   from {
@@ -41,6 +57,7 @@ a {
   }
 }
 
+/* Nexora background glow */
 
 body {
   position: relative;
@@ -63,4 +80,112 @@ body::before {
   );
   pointer-events: none;
   z-index: -1;
+}
+
+/* Light mode glow */
+
+html.light body::before {
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.02) 35%,
+    transparent 70%
+  );
+}
+
+html.light body {
+  background: #ffffff;
+  color: #050505;
+}
+
+html.light .bg-black {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-gray-950 {
+  background-color: #f8f8f8 !important;
+}
+
+html.light .text-white {
+  color: #050505 !important;
+}
+
+html.light .text-gray-300 {
+  color: #374151 !important;
+}
+
+html.light .text-gray-400 {
+  color: #4b5563 !important;
+}
+
+html.light .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+html.light .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+html.light .border-gray-800 {
+  border-color: #e5e7eb !important;
+}
+
+html.light .border-gray-900 {
+  border-color: #e5e7eb !important;
+}
+
+html.light .border-gray-700 {
+  border-color: #d1d5db !important;
+}
+
+/* ============================= */
+/* SCROLL REVEAL ANIMATIONS */
+/* ============================= */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.reveal-up {
+  animation: revealUp 0.9s ease-out both;
+}
+
+.reveal-left {
+  animation: revealLeft 0.9s ease-out both;
+}
+
+.reveal-right {
+  animation: revealRight 0.9s ease-out both;
 }

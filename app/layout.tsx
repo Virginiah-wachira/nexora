@@ -13,17 +13,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nexora — Digital Solutions",
+  title: {
+    default: "Nexora — Digital Solutions",
+    template: "%s — Nexora",
+  },
+
   description:
     "Nexora builds modern websites, mobile apps, custom software, AI and automation solutions for businesses and startups.",
+
   keywords: [
     "Nexora",
+    "software development",
     "web development",
     "mobile app development",
-    "custom software",
+    "custom software development",
     "AI automation",
     "digital solutions",
+    "Kenya software development",
   ],
+
+  authors: [
+    {
+      name: "Nexora",
+    },
+  ],
+
+  creator: "Nexora",
+
+  openGraph: {
+    title: "Nexora — Digital Solutions",
+    description:
+      "Modern websites, mobile apps, custom software, AI and automation solutions.",
+    type: "website",
+    siteName: "Nexora",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
