@@ -189,3 +189,10 @@ html.light .border-gray-700 {
 .reveal-right {
   animation: revealRight 0.9s ease-out both;
 }
+/* ACCESSIBILITY — improve dark mode text contrast */
+
+html:not(.light) .text-gray-500,
+html:not(.light) .text-gray-600,
+html:not(.light) .text-gray-700 {
+  color: #9ca3af !important;
+}

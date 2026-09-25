@@ -398,13 +398,12 @@ export default function Home() {
                         Nexora Digital Solutions
                       </p>
 
-                      <h4 className="mt-4 text-2xl font-bold">
-                        Performance-focused
-                      </h4>
-
-                      <h4 className="text-2xl font-bold text-gray-600">
-                        digital solutions.
-                      </h4>
+                      <h3 className="mt-4 text-2xl font-bold">
+  Performance-focused
+</h3>
+<h3 className="text-2xl font-bold text-gray-600">
+  digital solutions.
+</h3>
 
                       <p className="mt-2 max-w-xs text-xs leading-5 text-gray-600">
                         Websites, software, mobile apps & digital experiences.
@@ -910,6 +909,7 @@ export default function Home() {
                     </label>
 
                     <select
+                      id="project"
                       name="project"
                       className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-gray-400 outline-none transition-all duration-300 focus:border-gray-500"
                       defaultValue=""
