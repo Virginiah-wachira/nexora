@@ -399,11 +399,11 @@ export default function Home() {
                       </p>
 
                       <h3 className="mt-4 text-2xl font-bold">
-  Performance-focused
-</h3>
-<h3 className="text-2xl font-bold text-gray-600">
-  digital solutions.
-</h3>
+                        Performance-focused
+                      </h3>
+                      <h3 className="text-2xl font-bold text-gray-600">
+                        digital solutions.
+                      </h3>
 
                       <p className="mt-2 max-w-xs text-xs leading-5 text-gray-600">
                         Websites, software, mobile apps & digital experiences.
@@ -857,105 +857,118 @@ export default function Home() {
 
                 {/* RIGHT — CONTACT FORM */}
                 <form
-                  action="https://formspree.io/f/mbglyprn"
-                  method="POST"
-                  className="rounded-2xl border border-gray-800 bg-black/30 p-6 sm:p-8"
-                >
-                  <div className="mb-2">
-                    <p className="text-xs uppercase tracking-[0.3em] text-gray-600">
-                      Start a conversation
-                    </p>
+  action="https://formspree.io/f/mbglyprn"
+  method="POST"
+  className="rounded-2xl border border-gray-800 bg-black/30 p-6 sm:p-8"
+>
+  <div className="mb-2">
+    <p className="text-xs uppercase tracking-[0.3em] text-gray-600">
+      Start a conversation
+    </p>
 
-                    <h3 className="mt-2 text-2xl font-semibold">
-                      Tell us about your project.
-                    </h3>
+    <h3 className="mt-2 text-2xl font-semibold">
+      Tell us about your project.
+    </h3>
 
-                    <p className="mt-2 text-sm leading-6 text-gray-500">
-                      A few details are enough to get the conversation started.
-                    </p>
-                  </div>
-                  {/* NAME */}
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
-                      Name
-                    </label>
+    <p className="mt-2 text-sm leading-6 text-gray-500">
+      A few details are enough to get the conversation started.
+    </p>
+  </div>
 
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Your name"
-                      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
-                    />
-                  </div>
+  {/* NAME */}
+  <div className="mt-6">
+    <label
+      htmlFor="name"
+      className="mb-2 block text-xs uppercase tracking-widest text-gray-500"
+    >
+      Name
+    </label>
 
-                  {/* EMAIL */}
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
-                      Email
-                    </label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      placeholder="Your name"
+      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+    />
+  </div>
 
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="you@example.com"
-                      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
-                    />
-                  </div>
+  {/* EMAIL */}
+  <div className="mt-5">
+    <label
+      htmlFor="email"
+      className="mb-2 block text-xs uppercase tracking-widest text-gray-500"
+    >
+      Email
+    </label>
 
-                  {/* PROJECT TYPE */}
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
-                      Project type
-                    </label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      placeholder="you@example.com"
+      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+    />
+  </div>
 
-                    <select
-                      id="project"
-                      name="project"
-                      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-gray-400 outline-none transition-all duration-300 focus:border-gray-500"
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        What are you looking for?
-                      </option>
+  {/* PROJECT TYPE */}
+  <div className="mt-5">
+    <label
+      htmlFor="project"
+      className="mb-2 block text-xs uppercase tracking-widest text-gray-500"
+    >
+      Project type
+    </label>
 
-                      <option value="website">Website</option>
+    <select
+      id="project"
+      name="project"
+      aria-label="Project Type"
+      className="w-full rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-gray-400 outline-none transition-all duration-300 focus:border-gray-500"
+      defaultValue=""
+    >
+      <option value="" disabled>
+        What are you looking for?
+      </option>
 
-                      <option value="mobile-app">Mobile App</option>
+      <option value="website">Website</option>
+      <option value="mobile-app">Mobile App</option>
+      <option value="custom-software">Custom Software</option>
+      <option value="ai-automation">AI & Automation</option>
+      <option value="other">Something else</option>
+    </select>
+  </div>
 
-                      <option value="custom-software">Custom Software</option>
+  {/* MESSAGE */}
+  <div className="mt-5">
+    <label
+      htmlFor="message"
+      className="mb-2 block text-xs uppercase tracking-widest text-gray-500"
+    >
+      Message
+    </label>
 
-                      <option value="ai-automation">AI & Automation</option>
+    <textarea
+      id="message"
+      name="message"
+      rows={5}
+      placeholder="Tell us a little about your project..."
+      className="w-full resize-none rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
+    />
+  </div>
 
-                      <option value="other">Something else</option>
-                    </select>
-                  </div>
+  {/* SUBMIT */}
+  <button
+    type="submit"
+    className="group mt-7 flex w-full items-center justify-between rounded-xl bg-white px-6 py-4 text-sm font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200"
+  >
+    <span>Send Message</span>
 
-                  {/* MESSAGE */}
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-widest text-gray-500">
-                      Message
-                    </label>
-
-                    <textarea
-                      name="message"
-                      rows={5}
-                      placeholder="Tell us a little about your project..."
-                      className="w-full resize-none rounded-xl border border-gray-800 bg-black px-4 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-gray-500"
-                    />
-                  </div>
-
-                  {/* SUBMIT */}
-                  <button
-                    type="submit"
-                    className="group mt-2 flex items-center justify-between rounded-xl bg-white px-6 py-4 text-sm font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200"
-                  >
-                    <span>Send Message</span>
-
-                    <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </button>
-                </form>
+    <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+      →
+    </span>
+  </button>
+</form>
               </div>
             </div>
           </div>
