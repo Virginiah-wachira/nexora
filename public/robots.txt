@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nexora-mu-smoky.vercel.app/sitemap.xml
