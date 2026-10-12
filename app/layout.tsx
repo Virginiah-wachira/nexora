@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://nexora-mu-smoky.vercel.app"),
   title: {
     default: "Nexora — Web, App & Software Development",
     template: "%s — Nexora",

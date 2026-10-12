@@ -196,3 +196,57 @@ html:not(.light) .text-gray-600,
 html:not(.light) .text-gray-700 {
   color: #9ca3af !important;
 }
+
+/* NEXORA INTRO */
+
+@keyframes nexoraIntro {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  78% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes nexoraLogoIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nexoraLoadingLine {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.nexora-intro {
+  animation: nexoraIntro 1.35s ease forwards;
+}
+
+.nexora-intro-logo {
+  animation: nexoraLogoIn 0.7s ease-out forwards;
+}
+
+.nexora-loading-line {
+  transform-origin: left;
+  animation: nexoraLoadingLine 1s ease-out forwards;
+}
