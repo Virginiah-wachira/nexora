@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "./components/Reveal";
+import LiveBackground from "./components/LiveBackground";
+import HeroShowcase from "./components/HeroShowcase";
 import nexoraIcon from "./icon.png";
 import nexoraWordmark from "./wordmark.png";
 
@@ -52,7 +54,7 @@ export default function Home() {
     localStorage.setItem("nexora-theme", lightMode ? "light" : "dark");
   }, [lightMode]);
   return (
-    <main className="min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#020711] text-white">
       {/* NEXORA INTRO */}
 <div className="nexora-intro pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-[#020617]">
   <div className="nexora-intro-logo flex flex-col items-center">
@@ -88,23 +90,8 @@ export default function Home() {
   </div>
 </div>
 
-{/* NEXORA AMBIENT BACKGROUND */}
-<div className="nexora-page-bg pointer-events-none fixed inset-0 overflow-hidden">
-  <div className="nexora-orb nexora-orb-one absolute -left-[180px] top-[5%] h-[520px] w-[520px] rounded-full bg-blue-600/20 blur-[150px]" />
+<LiveBackground />
 
-  <div className="nexora-orb nexora-orb-two absolute right-[-200px] top-[30%] h-[560px] w-[560px] rounded-full bg-cyan-400/15 blur-[160px]" />
-
-  <div className="nexora-orb nexora-orb-three absolute bottom-[-200px] left-[30%] h-[560px] w-[560px] rounded-full bg-indigo-600/20 blur-[170px]" />
-
-  <div
-    className="absolute inset-0 opacity-[0.04]"
-    style={{
-      backgroundImage:
-        "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-      backgroundSize: "72px 72px",
-    }}
-  />
-</div>
       {/* NAVBAR */}
 <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#020617]/70 backdrop-blur-2xl">
   <div className="mx-auto max-w-7xl px-6 py-4">
@@ -243,80 +230,127 @@ export default function Home() {
     )}
   </div>
 </nav>
+
       {/* HERO */}
 <section
   id="home"
-  className="relative min-h-[92vh] overflow-hidden px-6 pb-24 pt-28 sm:pb-32 sm:pt-36"
+  className="relative min-h-[92vh] overflow-hidden bg-[#020711] px-6 pb-20 pt-24 sm:pb-28 sm:pt-32"
 >
-  {/* BACKGROUND */}
-  <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-[#020617]">
-    {/* BLUE GLOW */}
-    <div className="absolute -left-40 top-10 h-[520px] w-[520px] rounded-full bg-blue-600/20 blur-[150px]" />
-
-    {/* CYAN GLOW */}
-    <div className="absolute right-[-160px] top-[15%] h-[500px] w-[500px] animate-pulse rounded-full bg-cyan-400/15 blur-[160px]" />
-
-    {/* INDIGO GLOW */}
-    <div className="absolute bottom-[-200px] left-[35%] h-[520px] w-[520px] rounded-full bg-indigo-600/20 blur-[170px]" />
-
+  {/* LIVE BACKGROUND */}
+  <div
+    className="pointer-events-none absolute inset-0 overflow-hidden"
+    aria-hidden="true"
+  >
     {/* GRID */}
     <div
-      className="absolute inset-0 opacity-[0.07]"
+      className="absolute inset-0 opacity-[0.1]"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+          "linear-gradient(rgba(96,165,250,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.12) 1px, transparent 1px)",
         backgroundSize: "72px 72px",
       }}
     />
 
-    {/* SOFT FADE */}
-    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#020617]" />
+    {/* MOVING LIGHT RIBBONS */}
+    <svg
+      className="absolute inset-0 h-full w-full"
+      viewBox="0 0 1600 900"
+      fill="none"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <defs>
+        <linearGradient id="ribbonOne" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#2563eb" stopOpacity="0" />
+          <stop offset="45%" stopColor="#22d3ee" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#4f46e5" stopOpacity="0" />
+        </linearGradient>
+
+        <linearGradient id="ribbonTwo" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+          <stop offset="50%" stopColor="#2563eb" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+        </linearGradient>
+
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="18" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <path
+        className="nexora-ribbon-one"
+        d="M-180 700 C180 420 420 430 720 600 C980 750 1200 710 1760 320"
+        stroke="url(#ribbonOne)"
+        strokeWidth="26"
+        strokeLinecap="round"
+        filter="url(#glow)"
+      />
+
+      <path
+        className="nexora-ribbon-two"
+        d="M930 -140 C1100 130 1030 300 960 420 C890 560 980 680 1690 850"
+        stroke="url(#ribbonTwo)"
+        strokeWidth="20"
+        strokeLinecap="round"
+        filter="url(#glow)"
+      />
+
+      <path
+        className="nexora-ribbon-three"
+        d="M1320 -120 C1190 150 1130 340 1210 490 C1310 670 1500 610 1700 510"
+        stroke="#22d3ee"
+        strokeOpacity="0.35"
+        strokeWidth="10"
+        strokeLinecap="round"
+        filter="url(#glow)"
+      />
+    </svg>
+
+    {/* GLOWS */}
+    <div className="nexora-glow-one absolute -left-32 top-[20%] h-[500px] w-[500px] rounded-full bg-blue-600/25 blur-[150px]" />
+
+    <div className="nexora-glow-two absolute right-[-180px] top-[10%] h-[560px] w-[560px] rounded-full bg-cyan-400/20 blur-[160px]" />
+
+    <div className="absolute bottom-[-260px] left-[35%] h-[600px] w-[600px] rounded-full bg-indigo-600/20 blur-[180px]" />
+
+    <div className="absolute inset-0 bg-gradient-to-b from-[#020711]/10 via-transparent to-[#020711]" />
   </div>
 
-  <div className="mx-auto max-w-7xl">
-    <div className="grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
-      {/* LEFT SIDE */}
-      <div className="animate-[fadeInUp_0.9s_ease-out]">
-        {/* LABEL */}
-        <div className="mb-8 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/[0.05] backdrop-blur-xl">
-            <Image
-              src={nexoraIcon}
-              alt="Nexora"
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain"
-            />
-          </div>
+  <div className="relative z-10 mx-auto max-w-7xl">
+    <div className="grid min-h-[70vh] items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+      {/* LEFT */}
+      <div>
+        <div className="mb-8 flex items-center gap-4">
+          <span className="h-px w-10 bg-cyan-300" />
 
-          <p className="text-xs uppercase tracking-[0.32em] text-cyan-300/80">
+          <p className="text-xs uppercase tracking-[0.32em] text-cyan-300/70">
             Nexora Digital Solutions
           </p>
         </div>
 
-        {/* HEADING */}
-        <h1 className="max-w-5xl text-5xl font-semibold leading-[0.97] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-[82px]">
+        <h1 className="max-w-3xl text-5xl font-medium leading-[0.98] tracking-[-0.05em] text-white sm:text-6xl md:text-7xl lg:text-[78px]">
           Build the kind of
-          <span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+          <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text font-semibold text-transparent">
             digital presence
           </span>
           people remember.
         </h1>
 
-        {/* DESCRIPTION */}
-        <p className="mt-8 max-w-2xl text-base leading-7 text-gray-400 sm:text-lg">
-          Nexora designs and engineers fast websites, mobile products, custom
-          software and intelligent systems for businesses ready to move
-          differently.
+        <p className="mt-8 max-w-xl text-base leading-8 text-gray-400 sm:text-lg">
+          Nexora designs and engineers websites, mobile products, custom
+          software and intelligent systems built to perform in the real world.
         </p>
 
-        {/* BUTTONS */}
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
             href="#contact"
-            className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-50"
+            className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_50px_rgba(34,211,238,0.22)]"
           >
             Start a Project
+
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               →
             </span>
@@ -324,94 +358,38 @@ export default function Home() {
 
           <a
             href="#projects"
-            className="group inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-sm text-gray-300 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:text-white"
+            className="group inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-black/20 px-7 py-4 text-sm text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.06]"
           >
-            Explore Our Work
+            See Our Work
+
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               ↗
             </span>
           </a>
         </div>
-
-        {/* CAPABILITIES */}
-        <div className="mt-16 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/10 pt-6">
-          {["Strategy", "Design", "Engineering", "Automation"].map((item) => (
-            <span
-              key={item}
-              className="text-[10px] uppercase tracking-[0.25em] text-gray-500"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="relative hidden lg:block">
-        <div className="absolute -inset-10 rounded-full bg-blue-500/10 blur-[100px]" />
+      <HeroShowcase /> 
+      
+      </div>
 
-        <div className="relative rounded-[32px] border border-white/10 bg-white/[0.045] p-6 shadow-2xl shadow-blue-950/30 backdrop-blur-2xl">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500">
-                What we build
-              </p>
+    {/* BOTTOM CAPABILITIES */}
+    <div className="mt-8 grid gap-4 border-t border-white/10 pt-7 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        ["Strategy", "Clear direction"],
+        ["Design", "Useful and refined"],
+        ["Engineering", "Built to scale"],
+        ["Automation", "Work smarter"],
+      ].map(([title, text]) => (
+        <div key={title} className="flex items-start gap-4">
+          <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.8)]" />
 
-              <h2 className="mt-2 text-xl font-medium text-white">
-                Digital systems with purpose.
-              </h2>
-            </div>
-
-            <div className="h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.8)]" />
-          </div>
-
-          <div className="space-y-3">
-            {[
-              ["01", "Web Development", "Fast, modern, conversion-focused."],
-              ["02", "Mobile Apps", "Products designed around real users."],
-              ["03", "Custom Software", "Built around how your business works."],
-              ["04", "AI & Automation", "Less repetition. Smarter workflows."],
-            ].map(([number, title, text]) => (
-              <div
-                key={number}
-                className="group rounded-2xl border border-white/[0.08] bg-black/20 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-white/[0.05]"
-              >
-                <div className="flex gap-5">
-                  <span className="pt-1 text-xs text-cyan-300/70">
-                    {number}
-                  </span>
-
-                  <div>
-                    <h3 className="text-sm font-medium text-white">{title}</h3>
-
-                    <p className="mt-1 text-xs leading-5 text-gray-500">
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div>
+            <p className="text-sm text-white">{title}</p>
+            <p className="mt-1 text-xs text-gray-600">{text}</p>
           </div>
         </div>
-      </div>
-    </div>
-
-    {/* BOTTOM STATUS */}
-    <div className="mt-16 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-center gap-3">
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-40" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-300" />
-        </span>
-
-        <span className="text-xs uppercase tracking-[0.22em] text-gray-500">
-          Available for selected projects
-        </span>
-      </div>
-
-      <span className="text-xs uppercase tracking-[0.22em] text-gray-600">
-        Web · Mobile · Software · AI
-      </span>
+      ))}
     </div>
   </div>
 </section>
