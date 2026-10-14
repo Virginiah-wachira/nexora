@@ -1,17 +1,7 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
-
-type MotionBlob = {
-  x: number;
-  y: number;
-  radius: number;
-  strength: number;
-  hue: number;
-  speedX: number;
-  speedY: number;
-  phase: number;
-};
 
 export default function SectionMotion() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,234 +13,82 @@ export default function SectionMotion() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const reducedMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    if (reducedMotion) {
-      return;
-    }
+    if (reducedMotion) return;
 
-    const coarsePointer =
-      window.matchMedia(
-        "(pointer: coarse)"
-      ).matches;
+    const mobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    let dpr = 1;
+    let width = 0;
+    let height = 0;
     let frame = 0;
+    let lastDraw = 0;
+    let scroll = window.scrollY;
 
-    let scrollY = window.scrollY;
-    let pageVisible = !document.hidden;
-
-    /*
-      Desktop gets 3 moving lights.
-
-      Mobile gets only 2, softer and cheaper.
-    */
-    const desktopBlobs: MotionBlob[] = [
-      {
-        x: 0.18,
-        y: 0.22,
-        radius: 230,
-        strength: 0.075,
-        hue: 205,
-        speedX: 0.000075,
-        speedY: 0.000052,
-        phase: 0.4,
-      },
-      {
-        x: 0.78,
-        y: 0.38,
-        radius: 270,
-        strength: 0.06,
-        hue: 188,
-        speedX: -0.000058,
-        speedY: 0.000045,
-        phase: 1.8,
-      },
-      {
-        x: 0.43,
-        y: 0.78,
-        radius: 290,
-        strength: 0.052,
-        hue: 246,
-        speedX: 0.000043,
-        speedY: -0.000036,
-        phase: 2.7,
-      },
-    ];
-
-    const mobileBlobs: MotionBlob[] = [
-      {
-        x: 0.22,
-        y: 0.28,
-        radius: 180,
-        strength: 0.055,
-        hue: 205,
-        speedX: 0.00005,
-        speedY: 0.000036,
-        phase: 0.4,
-      },
-      {
-        x: 0.76,
-        y: 0.72,
-        radius: 210,
-        strength: 0.042,
-        hue: 238,
-        speedX: -0.00004,
-        speedY: 0.00003,
-        phase: 2.1,
-      },
-    ];
-
-    const getBlobs = () =>
-      coarsePointer ||
-      window.innerWidth < 768
-        ? mobileBlobs
-        : desktopBlobs;
+    const lights = mobile
+      ? [
+          { x: 0.2, y: 0.25, hue: 195, radius: 210 },
+          { x: 0.8, y: 0.72, hue: 235, radius: 240 },
+        ]
+      : [
+          { x: 0.15, y: 0.2, hue: 195, radius: 300 },
+          { x: 0.82, y: 0.4, hue: 215, radius: 350 },
+          { x: 0.45, y: 0.85, hue: 255, radius: 320 },
+        ];
 
     const resize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
 
-      /*
-        Desktop can use more resolution.
-
-        Mobile intentionally stays lower to
-        avoid wasting GPU power.
-      */
-      dpr =
-        coarsePointer ||
-        width < 768
-          ? Math.min(
-              window.devicePixelRatio || 1,
-              1
-            )
-          : Math.min(
-              window.devicePixelRatio || 1,
-              1.35
-            );
-
-      canvas.width =
-        Math.round(width * dpr);
-
-      canvas.height =
-        Math.round(height * dpr);
-
-      canvas.style.width =
-        `${width}px`;
-
-      canvas.style.height =
-        `${height}px`;
-
-      ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
+      const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        mobile ? 1 : 1.25
       );
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    const handleScroll = () => {
-      scrollY = window.scrollY;
+    const onScroll = () => {
+      scroll = window.scrollY;
     };
 
-    const handleVisibility = () => {
-      pageVisible =
-        !document.hidden;
+    const draw = (time: number) => {
+      frame = requestAnimationFrame(draw);
 
-      /*
-        Restart only when tab becomes visible.
-      */
-      if (
-        pageVisible &&
-        !frame
-      ) {
-        frame =
-          requestAnimationFrame(
-            render
-          );
-      }
-    };
+      if (document.hidden) return;
 
-    const drawBlob = (
-      blob: MotionBlob,
-      time: number,
-      index: number
-    ) => {
-      /*
-        Smaller travel range on mobile.
-      */
-      const movementScale =
-        coarsePointer ||
-        width < 768
-          ? 0.55
-          : 1;
+      // Save power on mobile.
+      const frameInterval = mobile ? 50 : 33;
 
-      const driftX =
-        Math.sin(
-          time *
-            blob.speedX +
-            blob.phase
-        ) *
-        90 *
-        movementScale;
+      if (time - lastDraw < frameInterval) return;
+      lastDraw = time;
 
-      const driftY =
-        Math.cos(
-          time *
-            blob.speedY +
-            blob.phase
-        ) *
-        70 *
-        movementScale;
+      ctx.clearRect(0, 0, width, height);
 
-      /*
-        Very restrained parallax.
-      */
-      const parallax =
-        scrollY *
-        (
-          coarsePointer
-            ? 0.004
-            : 0.009 +
-              index * 0.002
-        );
+      lights.forEach((light, index) => {
+        const phase = time * 0.00018 + index * 2;
 
-      const x =
-        width *
-          blob.x +
-        driftX;
+        const x =
+          width * light.x +
+          Math.sin(phase) * (mobile ? 35 : 75);
 
-      const y =
-        height *
-          blob.y +
-        driftY -
-        parallax;
+        const y =
+          height * light.y +
+          Math.cos(phase * 0.8) * (mobile ? 30 : 65) -
+          Math.sin(scroll * 0.001 + index) * 22;
 
-      const breathing =
-        Math.sin(
-          time * 0.00028 +
-            blob.phase
-        );
+        const radius =
+          light.radius +
+          Math.sin(phase * 0.65) * 25;
 
-      const radius =
-        blob.radius +
-        breathing *
-          (
-            coarsePointer
-              ? 18
-              : 30
-          );
-
-      const gradient =
-        ctx.createRadialGradient(
+        const gradient = ctx.createRadialGradient(
           x,
           y,
           0,
@@ -259,136 +97,55 @@ export default function SectionMotion() {
           radius
         );
 
-      gradient.addColorStop(
-        0,
-        `hsla(${blob.hue}, 100%, 60%, ${blob.strength})`
-      );
+        const strength = mobile ? 0.15 : 0.12;
 
-      gradient.addColorStop(
-        0.3,
-        `hsla(${blob.hue + 10}, 100%, 56%, ${
-          blob.strength * 0.52
-        })`
-      );
-
-      gradient.addColorStop(
-        0.62,
-        `hsla(${blob.hue + 24}, 95%, 50%, ${
-          blob.strength * 0.17
-        })`
-      );
-
-      gradient.addColorStop(
-        1,
-        `hsla(${blob.hue}, 90%, 45%, 0)`
-      );
-
-      ctx.fillStyle =
-        gradient;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        x,
-        y,
-        radius,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fill();
-    };
-
-    const render = (
-      time: number
-    ) => {
-      /*
-        Stop rendering entirely when the
-        browser tab isn't visible.
-      */
-      if (!pageVisible) {
-        frame = 0;
-        return;
-      }
-
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
-
-      ctx.globalCompositeOperation =
-        "screen";
-
-      const blobs =
-        getBlobs();
-
-      blobs.forEach(
-        (blob, index) => {
-          drawBlob(
-            blob,
-            time,
-            index
-          );
-        }
-      );
-
-      ctx.globalCompositeOperation =
-        "source-over";
-
-      frame =
-        requestAnimationFrame(
-          render
+        gradient.addColorStop(
+          0,
+          `hsla(${light.hue}, 100%, 60%, ${strength})`
         );
+
+        gradient.addColorStop(
+          0.35,
+          `hsla(${light.hue + 10}, 100%, 55%, ${
+            strength * 0.48
+          })`
+        );
+
+        gradient.addColorStop(
+          0.7,
+          `hsla(${light.hue + 20}, 100%, 50%, ${
+            strength * 0.12
+          })`
+        );
+
+        gradient.addColorStop(
+          1,
+          `hsla(${light.hue}, 100%, 50%, 0)`
+        );
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(
+          x - radius,
+          y - radius,
+          radius * 2,
+          radius * 2
+        );
+      });
     };
 
     resize();
 
-    window.addEventListener(
-      "resize",
-      resize
-    );
+    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      }
-    );
-
-    document.addEventListener(
-      "visibilitychange",
-      handleVisibility
-    );
-
-    frame =
-      requestAnimationFrame(
-        render
-      );
+    frame = requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener(
-        "resize",
-        resize
-      );
-
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
-      document.removeEventListener(
-        "visibilitychange",
-        handleVisibility
-      );
-
-      if (frame) {
-        cancelAnimationFrame(
-          frame
-        );
-      }
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -399,13 +156,12 @@ export default function SectionMotion() {
       style={{
         position: "fixed",
         inset: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: 0,
+        width: "100%",
+        height: "100%",
         pointerEvents: "none",
-        background: "transparent",
+        zIndex: 8,
         mixBlendMode: "screen",
-        opacity: 0.64,
+        opacity: 0.7,
       }}
     />
   );
