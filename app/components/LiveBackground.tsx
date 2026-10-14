@@ -17,14 +17,14 @@ export default function LiveBackground() {
         <defs>
           <linearGradient id="siteRibbonA" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#2563EB" stopOpacity="0" />
-            <stop offset="34%" stopColor="#2563EB" stopOpacity="0.82" />
-            <stop offset="60%" stopColor="#00E5FF" stopOpacity="1" />
+            <stop offset="34%" stopColor="#2563EB" stopOpacity="0.45" />
+<stop offset="60%" stopColor="#00E5FF" stopOpacity="0.65" />
             <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
           </linearGradient>
 
           <linearGradient id="siteRibbonB" x1="1" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#22D3EE" stopOpacity="0" />
-            <stop offset="48%" stopColor="#0EA5E9" stopOpacity="0.9" />
+            <stop offset="48%" stopColor="#0EA5E9" stopOpacity="0.5" />
             <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
           </linearGradient>
 
@@ -59,7 +59,7 @@ export default function LiveBackground() {
           className="nexora-site-ribbon-c"
           d="M1450 -140 C1270 130 1220 330 1320 500 C1430 685 1605 635 1780 520"
           stroke="#22D3EE"
-          strokeOpacity="0.48"
+          strokeOpacity="0.2"
           strokeWidth="11"
           strokeLinecap="round"
           filter="url(#siteGlow)"
@@ -67,11 +67,11 @@ export default function LiveBackground() {
       </svg>
 
       {/* MOVING GLOWS */}
-      <div className="nexora-site-glow-a absolute -left-[180px] top-[4%] h-[680px] w-[680px] rounded-full bg-blue-600/30 blur-[170px]" />
+      <div className="nexora-site-glow-a absolute -left-[180px] top-[4%] h-[620px] w-[620px] rounded-full bg-blue-600/12 blur-[190px]" />
 
-      <div className="nexora-site-glow-b absolute right-[-220px] top-[30%] h-[720px] w-[720px] rounded-full bg-cyan-400/20 blur-[185px]" />
+<div className="nexora-site-glow-b absolute right-[-220px] top-[30%] h-[660px] w-[660px] rounded-full bg-cyan-400/8 blur-[200px]" />
 
-      <div className="nexora-site-glow-c absolute bottom-[-260px] left-[22%] h-[760px] w-[760px] rounded-full bg-indigo-600/25 blur-[200px]" />
+<div className="nexora-site-glow-c absolute bottom-[-260px] left-[22%] h-[700px] w-[700px] rounded-full bg-indigo-600/10 blur-[210px]" />
 
       {/* DEPTH */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,7,17,0.18)_55%,rgba(2,7,17,0.72)_100%)]" />

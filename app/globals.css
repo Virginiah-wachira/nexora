@@ -787,3 +787,279 @@ html:not(.light) .text-gray-700 {
     transition: none;
   }
 }
+
+/* =========================================================
+   NEXORA — BLACK-FIRST FUTURISTIC REDESIGN OVERRIDES
+   Paste this at the VERY BOTTOM of app/globals.css
+   ========================================================= */
+
+:root {
+  --nx-black: #020202;
+  --nx-panel: #070707;
+  --nx-panel-2: #0a0a0a;
+  --nx-line: rgba(255, 255, 255, 0.09);
+  --nx-muted: #8b93a1;
+  --nx-blue: #2563eb;
+  --nx-cyan: #22d3ee;
+}
+
+html:not(.light),
+html:not(.light) body {
+  background: var(--nx-black) !important;
+}
+
+html:not(.light) main {
+  background: var(--nx-black) !important;
+}
+
+/* Keep the global live layer ABOVE the black page base but BELOW content. */
+.nexora-live-bg {
+  z-index: 0 !important;
+  background:
+    radial-gradient(circle at 74% 18%, rgba(37, 99, 235, 0.09), transparent 28%),
+    radial-gradient(circle at 18% 76%, rgba(34, 211, 238, 0.045), transparent 28%),
+    #020202 !important;
+}
+
+main > *:not(.nexora-live-bg):not(.nexora-intro) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Subtle grid: visible, but never louder than the page. */
+.nexora-grid {
+  opacity: 0.07 !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px) !important;
+  background-size: 70px 70px !important;
+}
+
+/* Blue is light, not the page colour. */
+.nexora-live-bg svg {
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  filter: saturate(0.75) contrast(1);
+}
+
+.nexora-site-glow-a,
+.nexora-site-glow-b,
+.nexora-site-glow-c {
+  opacity: 0.14 !important;
+  filter: blur(210px) !important;
+}
+
+/* Turn off the OLD second hero background. LiveBackground is now the only scene. */
+#home > [aria-hidden="true"] {
+  display: none !important;
+}
+/* ---------------------------------------------------------
+   NAVBAR
+--------------------------------------------------------- */
+
+nav {
+  border-color: rgba(255, 255, 255, 0.065) !important;
+  background: rgba(2, 2, 2, 0.76) !important;
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.32);
+}
+
+/* Remove the big nav pill appearance from the center links. */
+nav > div > div > div:nth-child(2) {
+  border-color: transparent !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+.nexora-nav-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  border: 1px solid rgba(103, 232, 249, 0.35) !important;
+  background: linear-gradient(105deg, #172554 0%, #2563eb 52%, #22d3ee 100%) !important;
+  box-shadow:
+    0 12px 32px rgba(37, 99, 235, 0.2),
+    0 0 24px rgba(34, 211, 238, 0.08);}
+
+    /* TOUCH GLOW */
+
+.nexora-touch-glow {
+  width: 220px;
+  height: 220px;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%) scale(0.35);
+  background:
+    radial-gradient(
+      circle,
+      rgba(34, 211, 238, 0.28) 0%,
+      rgba(37, 99, 235, 0.18) 28%,
+      rgba(37, 99, 235, 0.08) 48%,
+      transparent 72%
+    );
+  filter: blur(10px);
+  opacity: 0;
+  animation: nexoraTouchPulse 900ms ease-out forwards;
+  mix-blend-mode: screen;
+}
+
+@keyframes nexoraTouchPulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.6);
+  }
+}
+/* NEXORA AURORA CURSOR */
+
+.nexora-cursor-cloud {
+  position: fixed;
+
+  width: 720px;
+  height: 720px;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at 28% 32%,
+      rgba(34, 211, 238, 0.95) 0%,
+      rgba(34, 211, 238, 0.4) 18%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 72% 30%,
+      rgba(59, 130, 246, 0.95) 0%,
+      rgba(37, 99, 235, 0.42) 22%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 68% 72%,
+      rgba(139, 92, 246, 0.9) 0%,
+      rgba(124, 58, 237, 0.38) 20%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(236, 72, 153, 0.72) 0%,
+      rgba(236, 72, 153, 0.28) 18%,
+      transparent 42%
+    );
+
+  filter: blur(85px) saturate(1.5);
+
+  mix-blend-mode: screen;
+
+  transition: opacity 0.2s ease;
+
+  will-change: left, top;
+}
+
+/* =========================================================
+   NEXORA — UNIFIED DARK SECTION SYSTEM
+   ========================================================= */
+
+html:not(.light) body,
+html:not(.light) main {
+  background: #020201 !important;
+}
+
+html:not(.light) section {
+  background-color: rgba(2, 2, 2, 0.82) !important;
+}
+
+html:not(.light) #home,
+html:not(.light) #services,
+html:not(.light) #projects,
+html:not(.light) #about,
+html:not(.light) #contact,
+html:not(.light) #why-nexora {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2, 2, 2, 0.78),
+      rgba(2, 2, 2, 0.86)
+    ) !important;
+}
+
+html:not(.light) .nexora-live-bg {
+  opacity: 0.42 !important;
+}
+
+html:not(.light) .nexora-live-bg svg {
+  opacity: 0.26 !important;
+}
+
+html:not(.light) .nexora-site-glow-a,
+html:not(.light) .nexora-site-glow-b,
+html:not(.light) .nexora-site-glow-c {
+  opacity: 0.16 !important;
+  filter: blur(210px) !important;
+}
+
+/* QODE-STYLE TOUCH PLUME */
+
+.nexora-qode-smoke {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  pointer-events: none;
+
+  z-index: 2;
+
+  background: transparent;
+
+  mix-blend-mode: screen;
+
+  filter:
+    blur(12px)
+    saturate(1.35);
+
+  opacity: 0.9;
+
+  will-change: contents;
+}
+
+/* NEXORA FLUID SMOKE LAYER */
+
+.nexora-fluid-smoke {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  pointer-events: none;
+
+  z-index: 2;
+
+  background: transparent;
+
+  filter: blur(8px) saturate(1.25);
+  mix-blend-mode: screen;
+
+  opacity: 0.9;
+
+  will-change: contents;
+}
